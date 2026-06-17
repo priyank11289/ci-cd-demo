@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/home/priyank/Documents/github-actions/ci-cd-demo/build",
-  "command": "/usr/bin/c++   -std=gnu++17 -o CMakeFiles/app.dir/src/main.cpp.o -c /home/priyank/Documents/github-actions/ci-cd-demo/src/main.cpp",
-  "file": "/home/priyank/Documents/github-actions/ci-cd-demo/src/main.cpp",
-  "output": "CMakeFiles/app.dir/src/main.cpp.o"
-}
-]

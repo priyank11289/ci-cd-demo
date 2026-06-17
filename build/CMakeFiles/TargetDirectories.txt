@@ -1,3 +1,0 @@
-/home/priyank/Documents/github-actions/ci-cd-demo/build/CMakeFiles/app.dir
-/home/priyank/Documents/github-actions/ci-cd-demo/build/CMakeFiles/edit_cache.dir
-/home/priyank/Documents/github-actions/ci-cd-demo/build/CMakeFiles/rebuild_cache.dir
