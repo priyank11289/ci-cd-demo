@@ -37,4 +37,4 @@ jobs:
 
     - name: Clang Tidy
       run: |
-        clang-tidy src/main.cpp -p build
+        clang-tidy src/main.cpp -p buildu
