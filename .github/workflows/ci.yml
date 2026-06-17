@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - name: Install tools
+      run: |
+        sudo apt update
+        sudo apt install -y \
+          clang-format \
+          clang-tidy \
+          cmake \
+          g++
+
+    - name: Format Check
+      run: |
+        clang-format --dry-run --Werror src/main.cpp
+
+    - name: Configure
+      run: |
+        cmake -B build \
+        -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+
+    - name: Build
+      run: |
+        cmake --build build
+
+    - name: Clang Tidy
+      run: |
+        clang-tidy src/main.cpp -p build
