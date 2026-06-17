@@ -35,6 +35,11 @@ jobs:
       run: |
         cmake --build build
 
+    - name: Run Unit Tests
+      run: |
+        ctest --test-dir build --output-on-failure
+
     - name: Clang Tidy
       run: |
         clang-tidy src/main.cpp -p buildu
+

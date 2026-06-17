@@ -1,6 +1,6 @@
 #include <iostream>
 
-int add(int a, int b) { return a + b; }
+#include "math_utils.h"
 
 int main()
 {
