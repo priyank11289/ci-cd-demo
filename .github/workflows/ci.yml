@@ -20,11 +20,17 @@ jobs:
           clang-format \
           clang-tidy \
           cmake \
-          g++
+          g++ \
+          lcov
 
     - name: Format Check
       run: |
-        clang-format --dry-run --Werror src/main.cpp
+        clang-format --dry-run --Werror \
+          src/main.cpp \
+          src/math_utils.cpp \
+          src/math_utils.h \
+          test/test_coverage.cpp \
+          test/test_math.cpp
 
     - name: Configure
       run: |
@@ -41,5 +47,29 @@ jobs:
 
     - name: Clang Tidy
       run: |
-        clang-tidy src/main.cpp -p buildu
+        clang-tidy src/main.cpp -p build
 
+    - name: Configure Coverage
+      run: |
+        cmake -B build-coverage \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DENABLE_COVERAGE=ON
+
+    - name: Build Coverage
+      run: |
+        cmake --build build-coverage
+
+    - name: Generate Coverage Report
+      run: |
+        cmake --build build-coverage --target coverage
+
+    - name: Coverage Summary
+      run: |
+        lcov --rc branch_coverage=1 --summary build-coverage/coverage.filtered.info
+
+    - name: Upload Coverage Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: build-coverage/coverage-report
+        if-no-files-found: error
