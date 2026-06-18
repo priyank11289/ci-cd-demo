@@ -1,10 +1,9 @@
+.git/
 build/
 build-coverage/
-build-container/
-build-container-coverage/
-*.gcov
+coverage-report/
 *.gcda
 *.gcno
+*.gcov
 coverage.info
 coverage.filtered.info
-coverage-report/

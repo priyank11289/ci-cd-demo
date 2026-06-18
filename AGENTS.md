@@ -2,7 +2,7 @@
 
 ## Project Structure & Module Organization
 
-This is a small C++17 CMake project. Application code lives in `src/`: `main.cpp` builds the `app` executable, while `math_utils.cpp` and `math_utils.h` form the reusable `math_utils` library. Unit tests live in `test/`, currently `test/test_math.cpp`. Build outputs are generated under `build/` and should not be committed.
+This is a small C++17 CMake project. Application code lives in `src/`: `main.cpp` builds `app`, while `math_utils.cpp` and `math_utils.h` form the reusable library. Unit tests live in `test/`. Build outputs such as `build/`, `build-coverage/`, and container build directories should not be committed.
 
 ## Build, Test, and Development Commands
 
@@ -13,10 +13,12 @@ This is a small C++17 CMake project. Application code lives in `src/`: `main.cpp
 - `clang-format --dry-run --Werror src/main.cpp`: check formatting as CI does. Format changed C++ files before submitting.
 - `clang-tidy src/main.cpp -p build`: run static analysis using the generated compile database.
 - `cmake -B build-coverage -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON && cmake --build build-coverage --target coverage`: run tests with gcov instrumentation and generate an lcov HTML report in `build-coverage/coverage-report/`.
+- `docker build -t ci-cd-demo-builder .`: build the reusable C++ toolchain container.
+- `docker run --rm -v "$PWD":/workspace ci-cd-demo-builder bash -lc "cmake -B build-container && cmake --build build-container && ctest --test-dir build-container"`: build and test inside the container.
 
 ## Coding Style & Naming Conventions
 
-Use C++17 and keep implementation files in `src/` with matching headers when code is shared. The formatter is based on Google style with 4-space indentation and Allman braces, as defined in `.clang-format`. Prefer clear snake_case names for functions and files, following existing examples such as `math_utils.cpp` and `test_math.cpp`. Keep headers minimal, include only what is needed, and avoid committing generated files from `build/`.
+Use C++17 and keep shared code in `src/` with matching headers. Formatting follows `.clang-format`: Google style, 4-space indentation, and Allman braces. Prefer clear snake_case names, following examples such as `math_utils.cpp` and `test_math.cpp`. Keep headers minimal and include only what is needed.
 
 ## Testing Guidelines
 
